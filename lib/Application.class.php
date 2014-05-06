@@ -45,6 +45,10 @@ class Application
         }
 
         $db = new \mysqli($host, $username, $passwd, $dbname, $port, $socket);
+        if ($db->connect_error) {
+            $msg = 'could not connect to database: "' . $db->connect_error . '" (' . $db->connect_error . ')';
+            throw new Exception($msg, '3');
+        }
 
         self::$db = $db;
     }
