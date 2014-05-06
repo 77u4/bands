@@ -10,6 +10,7 @@
 *.vi
 *~
 *.sass-cache
+etc/config.php
 
 # OS or Editor folders
 .DS_Store
