@@ -12,7 +12,7 @@ class Router
                 self::$response = 'jay! ' . $route;
                 break;
             case 'info':
-                self::$response = Application::db()->info;
+                self::$response = 'MySQL Client Version: ' . Application::db()->client_info;
                 break;
         }
     }
