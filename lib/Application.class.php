@@ -11,8 +11,11 @@ class Application
 
     public static function run()
     {
-        Config::load();
+        \Config::load();
         self::connectDb();
+
+        $templateName = \Config::get('template', 'default');
+        \Router::setTemplate($templateName);
 
         $route = '/';
         if (\array_key_exists('q', $_GET)) {
@@ -39,7 +42,6 @@ class Application
         if ($port === false) {
             $port = ini_get("mysqli.default_port");
         }
-
         if ($socket === false) {
             $socket = ini_get("mysqli.default_socket");
         }
