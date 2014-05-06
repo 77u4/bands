@@ -11,7 +11,7 @@ class Router
             case '/':
             case 'home':
                 $template = 'home';
-                $params = array('title' => 'home');
+                $params = array('title' => 'home', 'copyrightDate' => (date("Y")=="2014" ? date("Y") : "2014 - ".date("Y")));
                 break;
             case 'info':
                 $template = 'info';
@@ -19,7 +19,7 @@ class Router
                 break;
             default:
             	$template = 'showUser';
-            	$params = array('title' => 'Profil von {{ user }}', 'user' => 'HorstDingDong3000');
+            	$params = array('title' => 'Profil von ', 'user' => 'HorstDingDong3000');
         }
         self::$response = self::renderTemplate($template, $params);
     }
