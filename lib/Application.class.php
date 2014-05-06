@@ -27,6 +27,7 @@ class Application
 
     private static function connectDb()
     {
+        //get db connection settings from config
         $host = Config::get('dbhost');
         $username = Config::get('dbuser');
         $passwd = Config::get('dbpass');
@@ -34,6 +35,7 @@ class Application
         $port = Config::get('dbport');
         $socket = Config::get('dbsocket');
 
+        //load default port and socket if not set in config
         if ($port === false) {
             $port = ini_get("mysqli.default_port");
         }
@@ -47,7 +49,7 @@ class Application
         self::$db = $db;
     }
 
-    private static function db()
+    public static function db()
     {
         return self::$db;
     }

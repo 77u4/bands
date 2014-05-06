@@ -6,7 +6,15 @@ class Router
 
     public static function parse($route)
     {
-        self::$response = 'jay! ' . $route;
+        switch ($route) {
+            case '/':
+            case 'home':
+                self::$response = 'jay! ' . $route;
+                break;
+            case 'info':
+                self::$response = Application::db()->info;
+                break;
+        }
     }
 
     public static function getResponse()
