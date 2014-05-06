@@ -17,6 +17,9 @@ class Router
                 $template = 'info';
                 $params = array('title' => 'info', 'version' => Application::db()->client_info);
                 break;
+            default:
+            	$template = 'showUser';
+            	$params = array('title' => 'Profil von {{ user }}', 'user' => 'HorstDingDong3000');
         }
         self::$response = self::renderTemplate($template, $params);
     }
@@ -56,11 +59,11 @@ class Router
         $pageTemplate = self::getTemplateFileContent($pageTemplateName);
 
         //parsing page template into base template;
-        $templateOutput = self::replaceTemplaetPlaceHolder($baseTemplate, 'pageContent', $pageTemplate);
+        $templateOutput = self::replaceTemplatePlaceHolder($baseTemplate, 'pageContent', $pageTemplate);
 
         if (is_array($params)) {
             foreach ($params as $key => $value) {
-                $templateOutput = self::replaceTemplaetPlaceHolder($templateOutput, $key, $value);
+                $templateOutput = self::replaceTemplatePlaceHolder($templateOutput, $key, $value);
             }
         } else {
             throw new Exception('Invalid Template parameters provided.', 5);
@@ -82,7 +85,7 @@ class Router
         return $content;
     }
 
-    private static function replaceTemplaetPlaceHolder($content, $source = false, $target = '')
+    private static function replaceTemplatePlaceHolder($content, $source = false, $target = '')
     {
         if ($source === false || empty($source)) {
             $source = '[A-Z0-9_\-]+';
