@@ -5,7 +5,7 @@
 require_once('../lib/autoload.php');
 
 try {
-    \Application::run();
+    echo \Application::run();
 } catch (Exception $e) {
     echo '<pre>';
     echo 'Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() . PHP_EOL . PHP_EOL;
