@@ -14,7 +14,6 @@ class Router
 
         switch ($routeElements[0]) {
             case '/':
-<<<<<<< HEAD
             case 'home':
                 $template = 'home';
                 $params = array('title' => 'home', 'copyrightDate' => (date("Y")=="2014" ? date("Y") : "2014 - ".date("Y")));
@@ -26,11 +25,9 @@ class Router
             default:
             	$template = 'showUser';
             	$params = array('title' => 'Profil von ', 'user' => 'HorstDingDong3000');
-=======
             case '':
                 $routeElements[0] = 'home';
                 break;
->>>>>>> master
         }
 
         Router::execute($routeElements);
