@@ -33,30 +33,32 @@ class Router
             $className = $baseRoute . 'Route';
             $template = $className::getPageTemplate();
             $params = $className::getPageParams();
+            $baseTemplate = $className::getPageBaseTemplate();
         } else {
             $notfound = self::handleNotFound();
             $template = $notfound['template'];
             $params = $notfound['params'];
+            $baseTemplate = 'cover';
         }
 
-        self::$response = self::renderTemplate($template, $params);
+        self::$response = self::renderTemplate($template, $params, $baseTemplate);
     }
 
     private static function handleNotFound()
     {
         $routeElements = self::getRoute();
         $username = $routeElements[0];
-
+		
         $result = array(
             'template' => '404',
-            'params' => array('url' => implode('/', $routeElements))
+            'params' => array('title' => '404', 'url' => htmlentities(implode('/', $routeElements)), 'copyrightDate' => (date("Y")=="2014" ? date("Y") : "2014 - ".date("Y")))
         );
 
         if (User::exists($username)) {
             $result['template'] = 'user';
             $result['params'] = array(
                 'username' => $username,
-                'title' => 'Profil von ' . $username
+                'title' => '@'.$username.'\'s Profile'
             );
         }
 
