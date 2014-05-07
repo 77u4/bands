@@ -14,17 +14,6 @@ class Router
 
         switch ($routeElements[0]) {
             case '/':
-            case 'home':
-                $template = 'home';
-                $params = array('title' => 'home', 'copyrightDate' => (date("Y")=="2014" ? date("Y") : "2014 - ".date("Y")));
-                break;
-            case 'info':
-                $template = 'info';
-                $params = array('title' => 'info', 'version' => Application::db()->client_info);
-                break;
-            default:
-            	$template = 'showUser';
-            	$params = array('title' => 'Profil von ', 'user' => 'HorstDingDong3000');
             case '':
                 $routeElements[0] = 'home';
                 break;
