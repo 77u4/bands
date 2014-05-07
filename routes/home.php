@@ -13,7 +13,8 @@ class homeRoute implements RouteInterface
         $clientVersion = Application::db()->client_info;
 
         return array(
-            'title' => 'home'
+            'title' => 'Bands',
+            'copyrightDate' => (date("Y")=="2014" ? date("Y") : "2014 - ".date("Y"))
         );
     }
 }

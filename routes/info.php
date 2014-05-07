@@ -7,7 +7,12 @@ class infoRoute implements RouteInterface
     {
         return 'info';
     }
-
+	
+	public function getPageBaseTemplate()
+	{
+		return 'index';
+	}
+	
     public function getPageParams()
     {
         $clientVersion = Application::db()->client_info;
