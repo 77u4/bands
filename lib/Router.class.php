@@ -4,25 +4,62 @@ class Router
 {
     private static $response;
     private static $currentTemplate;
+    private static $routeElements;
 
     public static function parse($route)
     {
-        switch ($route) {
+        $routeElements = explode('/', $route);
+        
+        self::$routeElements = $routeElements;
+
+        switch ($routeElements[0]) {
             case '/':
-            case 'home':
-                $template = 'home';
-                $params = array('title' => 'home');
-                break;
-            case 'info':
-                $template = 'info';
-                $params = array('title' => 'info', 'version' => Application::db()->client_info);
+            case '':
+                $routeElements[0] = 'home';
                 break;
         }
+
+        Router::execute($routeElements);
+    }
+
+    public static function execute($routeElements)
+    {
+        $baseRoute = $routeElements[0];
+
+        $baseDir = dirname(__FILE__);
+        $routeFilePath = $baseDir.'/../routes/'.$baseRoute.'.php';
+        if(file_exists($routeFilePath)){
+            require_once($routeFilePath);
+            $className = $baseRoute.'Route';
+            $template = $className::getPageTemplate();
+            $params = $className::getPageParams();
+        }else{
+            $notfound = self::handleNotFound();
+            $template = $notfound['template'];
+            $params = $notfound['params'];
+        }
+        
         self::$response = self::renderTemplate($template, $params);
+    }
+
+    private static function handleNotFound(){
+        $routeElements = self::getRoute();
+        $result = array(
+            'template' => '404',
+            'params' => array('url' => implode('/', $routeElements))
+        );
+        return $result;
+    }
+
+    public static function getRoute(){
+        return self::$routeElements;
     }
 
     public static function getResponse()
     {
+        if(!isset(self::$response)){
+            throw new Exception('route response has not yet been set', 6);
+        }
         return self::$response;
     }
 
