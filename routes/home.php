@@ -8,6 +8,11 @@ class homeRoute implements RouteInterface
         return 'home';
     }
 
+	public function getPageBaseTemplate()
+	{
+		return 'cover';
+	}
+
     public function getPageParams()
     {
         $clientVersion = Application::db()->client_info;
