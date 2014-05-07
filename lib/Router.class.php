@@ -9,7 +9,7 @@ class Router
     public static function parse($route)
     {
         $routeElements = explode('/', $route);
-        
+
         self::$routeElements = $routeElements;
 
         switch ($routeElements[0]) {
@@ -27,37 +27,50 @@ class Router
         $baseRoute = $routeElements[0];
 
         $baseDir = dirname(__FILE__);
-        $routeFilePath = $baseDir.'/../routes/'.$baseRoute.'.php';
-        if(file_exists($routeFilePath)){
+        $routeFilePath = $baseDir . '/../routes/' . $baseRoute . '.php';
+        if (file_exists($routeFilePath)) {
             require_once($routeFilePath);
-            $className = $baseRoute.'Route';
+            $className = $baseRoute . 'Route';
             $template = $className::getPageTemplate();
             $params = $className::getPageParams();
-        }else{
+        } else {
             $notfound = self::handleNotFound();
             $template = $notfound['template'];
             $params = $notfound['params'];
         }
-        
+
         self::$response = self::renderTemplate($template, $params);
     }
 
-    private static function handleNotFound(){
+    private static function handleNotFound()
+    {
         $routeElements = self::getRoute();
+        $username = $routeElements[0];
+
         $result = array(
             'template' => '404',
             'params' => array('url' => implode('/', $routeElements))
         );
+
+        if (User::exists($username)) {
+            $result['template'] = 'user';
+            $result['params'] = array(
+                'username' => $username,
+                'title' => 'Profil von ' . $username
+            );
+        }
+
         return $result;
     }
 
-    public static function getRoute(){
+    public static function getRoute()
+    {
         return self::$routeElements;
     }
 
     public static function getResponse()
     {
-        if(!isset(self::$response)){
+        if (!isset(self::$response)) {
             throw new Exception('route response has not yet been set', 6);
         }
         return self::$response;
@@ -93,11 +106,11 @@ class Router
         $pageTemplate = self::getTemplateFileContent($pageTemplateName);
 
         //parsing page template into base template;
-        $templateOutput = self::replaceTemplaetPlaceHolder($baseTemplate, 'pageContent', $pageTemplate);
+        $templateOutput = self::replaceTemplatePlaceHolder($baseTemplate, 'pageContent', $pageTemplate);
 
         if (is_array($params)) {
             foreach ($params as $key => $value) {
-                $templateOutput = self::replaceTemplaetPlaceHolder($templateOutput, $key, $value);
+                $templateOutput = self::replaceTemplatePlaceHolder($templateOutput, $key, $value);
             }
         } else {
             throw new Exception('Invalid Template parameters provided.', 5);
@@ -119,7 +132,7 @@ class Router
         return $content;
     }
 
-    private static function replaceTemplaetPlaceHolder($content, $source = false, $target = '')
+    private static function replaceTemplatePlaceHolder($content, $source = false, $target = '')
     {
         if ($source === false || empty($source)) {
             $source = '[A-Z0-9_\-]+';
