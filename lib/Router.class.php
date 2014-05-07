@@ -58,6 +58,8 @@ class Router
                 'username' => $username,
                 'title' => 'Profil von ' . $username
             );
+        }else{
+            header('HTTP/1.0 404 Not Found');
         }
 
         return $result;
