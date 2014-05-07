@@ -127,7 +127,7 @@ class Router
     {
         $templatedir = self::getTemplateDir();
         $templateFileName = $templatedir . '/' . $filename . '.tpl';
-
+		
         if (\file_exists($templateFileName)) {
             $content = \file_get_contents($templateFileName);
         } else {

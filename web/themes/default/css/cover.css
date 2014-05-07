@@ -148,6 +148,11 @@ body {
   background-size: cover;
 }
 
+.feature-box {
+	z-index: 2;
+	background-color: rgba(0,0,0,0.73);
+}
+
 /*
  * Footer
  */
