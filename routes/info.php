@@ -16,10 +16,13 @@ class infoRoute implements RouteInterface
     public function getPageParams()
     {
         $clientVersion = Application::db()->client_info;
-
+		
+		$test = \Band::exists('Touché Amoré');
+		
         return array(
             'title' => 'info',
-            'version' => $clientVersion
+            'version' => $clientVersion,
+            'test' => $test
         );
     }
 }

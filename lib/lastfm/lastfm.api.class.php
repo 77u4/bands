@@ -8,13 +8,13 @@
  */
 function lastfm_autoload($name){
 	if(stripos($name, 'Cache') !== false){
-		$filename = realpath(sprintf("%s/cache/%s.php", dirname(__FILE__), $name));
+		$filename = realpath(sprintf("%s/cache/%s.class.php", dirname(__FILE__), $name));
 	}
 	else if(stripos($name, 'Caller') !== false){
-		$filename = realpath(sprintf("%s/caller/%s.php", dirname(__FILE__), $name));
+		$filename = realpath(sprintf("%s/caller/%s.class.php", dirname(__FILE__), $name));
 	}
 	else{
-		$filename = realpath(sprintf("%s/%s.php", dirname(__FILE__), $name));
+		$filename = realpath(sprintf("%s/%s.class.php", dirname(__FILE__), $name));
 	}
 
 	if(file_exists($filename) && is_file($filename)){
