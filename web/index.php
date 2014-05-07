@@ -7,6 +7,7 @@ require_once('../lib/autoload.php');
 try {
     echo \Application::run();
 } catch (Exception $e) {
+    header('HTTP/1.1 500 Internal Server Error');
     echo '<pre>';
     echo 'Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine() . PHP_EOL . PHP_EOL;
     if (is_array($e->getTrace())) {
