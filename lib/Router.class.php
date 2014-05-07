@@ -4,11 +4,17 @@ class Router
 {
     private static $response;
     private static $currentTemplate;
+    private static $routeElements;
 
     public static function parse($route)
     {
-        switch ($route) {
+        $routeElements = explode('/', $route);
+
+        self::$routeElements = $routeElements;
+
+        switch ($routeElements[0]) {
             case '/':
+<<<<<<< HEAD
             case 'home':
                 $template = 'home';
                 $params = array('title' => 'home', 'copyrightDate' => (date("Y")=="2014" ? date("Y") : "2014 - ".date("Y")));
@@ -20,12 +26,67 @@ class Router
             default:
             	$template = 'showUser';
             	$params = array('title' => 'Profil von ', 'user' => 'HorstDingDong3000');
+=======
+            case '':
+                $routeElements[0] = 'home';
+                break;
+>>>>>>> master
         }
+
+        Router::execute($routeElements);
+    }
+
+    public static function execute($routeElements)
+    {
+        $baseRoute = $routeElements[0];
+
+        $baseDir = dirname(__FILE__);
+        $routeFilePath = $baseDir . '/../routes/' . $baseRoute . '.php';
+        if (file_exists($routeFilePath)) {
+            require_once($routeFilePath);
+            $className = $baseRoute . 'Route';
+            $template = $className::getPageTemplate();
+            $params = $className::getPageParams();
+        } else {
+            $notfound = self::handleNotFound();
+            $template = $notfound['template'];
+            $params = $notfound['params'];
+        }
+
         self::$response = self::renderTemplate($template, $params);
+    }
+
+    private static function handleNotFound()
+    {
+        $routeElements = self::getRoute();
+        $username = $routeElements[0];
+
+        $result = array(
+            'template' => '404',
+            'params' => array('url' => implode('/', $routeElements))
+        );
+
+        if (User::exists($username)) {
+            $result['template'] = 'user';
+            $result['params'] = array(
+                'username' => $username,
+                'title' => 'Profil von ' . $username
+            );
+        }
+
+        return $result;
+    }
+
+    public static function getRoute()
+    {
+        return self::$routeElements;
     }
 
     public static function getResponse()
     {
+        if (!isset(self::$response)) {
+            throw new Exception('route response has not yet been set', 6);
+        }
         return self::$response;
     }
 
