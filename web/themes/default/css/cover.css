@@ -103,6 +103,10 @@ body {
   }
 }
 
+a.nolink, a.nolink:hover {
+  text-decoration: none;
+  cursor: default;
+}
 
 /*
  * Cover
