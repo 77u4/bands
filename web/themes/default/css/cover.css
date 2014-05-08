@@ -103,15 +103,45 @@ body {
   }
 }
 
+a.nolink, a.nolink:hover {
+  text-decoration: none;
+  cursor: default;
+}
 
-/*
- * Cover
- */
+.feature-box {
+	background: rgba(0,0,0,0.62);
+	margin-top: 2%;
+	margin-bottom: 2%;
+	border-radius: 15px;
+}
+
+.features {
+
+}
+
+.features_svg {
+	width: 130% !important;
+	margin-left: -50%;
+	margin-right: -50%;
+	position: relative;
+}
+
+@media (min-width: 768px){
+	.features_svg {
+		width: 80% !important;
+	}
+	.feature-box {
+		padding: 5px;
+		padding-bottom: 10px;
+	}
+}
 
 .cover {
   padding: 0 20px;
   position: relative;
+  margin-top: 60px;
 }
+
 .cover .btn-lg {
   padding: 10px 20px;
   font-weight: bold;
@@ -146,6 +176,11 @@ body {
   width: 100%;
   overflow: hidden;
   background-size: cover;
+}
+
+.feature-box {
+  z-index: 2;
+  background-color: rgba(0,0,0,0.73);
 }
 
 /*
