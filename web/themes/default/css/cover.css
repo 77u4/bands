@@ -112,19 +112,29 @@ a.nolink, a.nolink:hover {
 	background: rgba(0,0,0,0.62);
 	margin-top: 2%;
 	margin-bottom: 2%;
+	border-radius: 15px;
 }
 
 .features {
-	border-radius: 15px;
+
 }
 
 .features_svg {
 	width: 130% !important;
+	margin-left: -50%;
+	margin-right: -50%;
+	position: relative;
 }
 
-/*
- * Cover
- */
+@media (min-width: 768px){
+	.features_svg {
+		width: 80% !important;
+	}
+	.feature-box {
+		padding: 5px;
+		padding-bottom: 10px;
+	}
+}
 
 .cover {
   padding: 0 20px;

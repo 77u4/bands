@@ -12,7 +12,7 @@
 		  	<div id="container-fluid" class="inner cover features">
 		  	 <div id="row" class="feature-box lead">
 		  	  <div class="col-md-2">
-				<svg class="features_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				<svg style="margin-top:5px;" class="features_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 					 width="238.529px" height="204.738px" viewBox="0 0 238.529 204.738" enable-background="new 0 0 238.529 204.738"
 					 xml:space="preserve">
 				<g id="Ebene_1">
