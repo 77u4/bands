@@ -108,6 +108,20 @@ a.nolink, a.nolink:hover {
   cursor: default;
 }
 
+.feature-box {
+	background: rgba(0,0,0,0.62);
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.features {
+	border-radius: 15px;
+}
+
+.features_svg {
+	width: 130% !important;
+}
+
 /*
  * Cover
  */
@@ -115,7 +129,9 @@ a.nolink, a.nolink:hover {
 .cover {
   padding: 0 20px;
   position: relative;
+  margin-top: 60px;
 }
+
 .cover .btn-lg {
   padding: 10px 20px;
   font-weight: bold;
@@ -153,8 +169,8 @@ a.nolink, a.nolink:hover {
 }
 
 .feature-box {
-	z-index: 2;
-	background-color: rgba(0,0,0,0.73);
+  z-index: 2;
+  background-color: rgba(0,0,0,0.73);
 }
 
 /*
