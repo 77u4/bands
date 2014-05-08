@@ -103,6 +103,10 @@ body {
   }
 }
 
+a.nolink, a.nolink:hover {
+  text-decoration: none;
+  cursor: default;
+}
 
 /*
  * Cover
@@ -146,6 +150,11 @@ body {
   width: 100%;
   overflow: hidden;
   background-size: cover;
+}
+
+.feature-box {
+	z-index: 2;
+	background-color: rgba(0,0,0,0.73);
 }
 
 /*
