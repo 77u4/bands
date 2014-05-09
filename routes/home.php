@@ -15,7 +15,6 @@ class homeRoute implements RouteInterface
 
     public function getPageParams()
     {
-        $clientVersion = Application::db()->client_info;
 
         return array(
             'title' => 'Bands',
